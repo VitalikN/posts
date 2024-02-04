@@ -1,4 +1,10 @@
+import PostsList from "@/components/PostsList";
+
 const Home = () => {
-  return <>hi</>;
+  return (
+    <>
+      <PostsList />
+    </>
+  );
 };
 export default Home;

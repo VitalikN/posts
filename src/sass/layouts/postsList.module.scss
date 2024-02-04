@@ -1,0 +1,33 @@
+@import "../utils/container.scss";
+@import "../utils/mixins";
+.posts__list__section {
+  padding: 50px;
+}
+.title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.item {
+  display: flex;
+  width: 300px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.text {
+  width: 280px;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.5s;
+  &:hover {
+    scale: 1.4;
+  }
+}

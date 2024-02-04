@@ -4,7 +4,6 @@ import styles from "../sass/layouts/header.module.scss";
 import { FaHome } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import authSelector from "@/redux/auth/authSelector";
-import { LuLogOut } from "react-icons/lu";
 
 const Header = () => {
   const jwt = useSelector(authSelector.selectJwt);

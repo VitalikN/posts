@@ -4,23 +4,6 @@
   --font-mono: "Oswald", "Fira Sans", sans-serif, ui-monospace, "Cascadia Mono",
     "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-
-  --background-body: #f3f5fa;
-
-  --background-burger: #dcefd8;
-  --background: #97d28b;
-  --background-menu: rgba(23, 61, 51, 0.75);
-  --color-icon: #fff;
-  --color-hover: #97d28b;
-  --color-text: #173d33;
-  --background-hover: #173d33;
-  --fill: #173d33;
-
-  --border: 1px solid #97d28b;
-  --border-hover: 1px solid #173d33;
-  --background-cases: #eaedf1;
-
-  --color-error: #d28b8b;
 }
 
 * {

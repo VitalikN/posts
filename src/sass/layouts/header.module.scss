@@ -24,6 +24,7 @@
   color: #e8e8e8;
   display: flex;
   align-items: center;
+  justify-content: space-around;
   gap: 8px;
   margin-left: auto;
   @include tablet {

@@ -7,6 +7,7 @@ import styles from "../sass/layouts/login.module.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLoginMutation } from "@/redux/auth/authAPI";
+import { useRouter } from "next/navigation";
 
 export const validationSchema = object().shape({
   identifier: string().required("Required field!"),
@@ -27,7 +28,7 @@ export interface ErrorFeedbackProps {
 
 const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
-
+  const router = useRouter();
   // const name = useSelector(authSelector.getName);
   // const email = useSelector(authSelector.getidentifier);
   // const jwt = useSelector(authSelector.selectJwt);
@@ -53,6 +54,7 @@ const Login = () => {
             : toast.error("Invalid login or password.");
         }
         resetForm();
+        router.push("/");
       })
 
       .catch(() => toast.error("Invalid login or password."));

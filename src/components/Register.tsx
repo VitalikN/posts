@@ -37,33 +37,25 @@ const Register = () => {
       </ErrorMessage>
     );
   };
-  const handleRegister = async (values: FormValues) => {
-    try {
-      const response = await register(values);
-      if ("data" in response) {
-        toast.success(
-          "Successfully registered! Please proceed to sign in for confirmation."
-        );
-      } else {
-        toast.error("Invalid login or password.");
-      }
-    } catch (error) {
-      toast.error("Invalid login or password.");
-    }
-  };
+
   const handleSubmit = async (
     values: FormValues,
     { resetForm }: { resetForm: () => void }
   ) => {
-    try {
-      await handleRegister(values);
-      toast.success("Successful registration!");
+    await register(values)
+      .unwrap()
+      .then((res) => {
+        {
+          res.jwt
+            ? toast.success("Successfully registered! ")
+            : toast.error("Invalid login or password.");
+        }
+        resetForm();
+      })
 
-      resetForm();
-    } catch (error) {
-      toast.error("Registration failed.");
-    }
+      .catch(() => toast.error("Invalid login or password."));
   };
+
   return (
     <section>
       <div className={`${styles.container} `}>

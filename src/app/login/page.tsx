@@ -1,6 +1,6 @@
-import Login from "@/components/Login";
+import LoginOrHome from "@/components/LoginOrHome";
 
 const LoginPage = () => {
-  return <Login />;
+  return <LoginOrHome />;
 };
 export default LoginPage;

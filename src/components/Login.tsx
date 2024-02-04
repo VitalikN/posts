@@ -7,8 +7,6 @@ import styles from "../sass/layouts/login.module.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLoginMutation } from "@/redux/auth/authAPI";
-import authSelector from "@/redux/auth/authSelector";
-import { useSelector } from "react-redux";
 
 export const validationSchema = object().shape({
   identifier: string().required("Required field!"),
@@ -30,13 +28,9 @@ export interface ErrorFeedbackProps {
 const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
 
-  const name = useSelector(authSelector.getName);
-  const email = useSelector(authSelector.getidentifier);
-  const jwt = useSelector(authSelector.selectJwt);
-
-  console.log("name", name);
-  console.log("email", email);
-  console.log("jwt", jwt);
+  // const name = useSelector(authSelector.getName);
+  // const email = useSelector(authSelector.getidentifier);
+  // const jwt = useSelector(authSelector.selectJwt);
 
   const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
     return (
@@ -45,28 +39,23 @@ const Login = () => {
       </ErrorMessage>
     );
   };
-  const handleLogin = async (values: FormValues) => {
-    try {
-      const response = await login(values);
-      {
-        "data" in response
-          ? toast.success("Successfully logged in!")
-          : toast.error("Invalid login or password.");
-      }
-    } catch (error) {
-      toast.error("Invalid login or password.");
-    }
-  };
+
   const handleSubmit = async (
     values: FormValues,
     { resetForm }: { resetForm: () => void }
   ) => {
-    try {
-      await handleLogin(values);
-      resetForm();
-    } catch (error) {
-      toast.error("Invalid login or password.");
-    }
+    await login(values)
+      .unwrap()
+      .then((res) => {
+        {
+          res.jwt
+            ? toast.success("Successfully logged in!")
+            : toast.error("Invalid login or password.");
+        }
+        resetForm();
+      })
+
+      .catch(() => toast.error("Invalid login or password."));
   };
   return (
     <section>

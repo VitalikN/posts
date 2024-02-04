@@ -6,7 +6,7 @@ import { authApi } from "./authAPI";
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["jwt"],
+  whitelist: ["jwt", "user"],
 };
 
 const initialState = {
@@ -15,7 +15,6 @@ const initialState = {
     email: null,
     id: null,
   },
-  identifier: null,
   jwt: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -33,25 +32,24 @@ const authSlice = createSlice({
     builder
       .addMatcher(
         authApi.endpoints.register.matchFulfilled,
-        (state, action) => {
-          state.user.email = action.payload.email;
-          state.user.username = action.payload.username;
-          state.user.id = action.payload.id;
-
-          state.jwt = action.payload.jwt;
+        (state, { payload }) => {
+          state.user.email = payload.user.email;
+          state.user.username = payload.user.username;
+          state.user.id = payload.user.id;
+          state.jwt = payload.jwt;
           state.isLoggedIn = true;
         }
       )
-      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
-        state.user.email = action.payload.email;
-        //
-        state.identifier = action.payload.identifier;
-        //
-        state.user.username = action.payload.username;
-        state.user.id = action.payload.id;
-        state.jwt = action.payload.jwt;
-        state.isLoggedIn = true;
-      });
+      .addMatcher(
+        authApi.endpoints.login.matchFulfilled,
+        (state, { payload }) => {
+          state.user.email = payload.user.email;
+          state.user.username = payload.user.username;
+          state.user.id = payload.user.id;
+          state.jwt = payload.jwt;
+          state.isLoggedIn = true;
+        }
+      );
   },
 });
 

@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import store from "../store";
 
-// type RootState = ReturnType<typeof store.getState>;
 const { baseUrl } = process.env;
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -16,7 +14,6 @@ export const authApi = createApi({
         method: "POST",
         body: credentials,
       }),
-      invalidatesTags: ["auth"],
     }),
     login: builder.mutation({
       query: (credentials) => ({
@@ -24,7 +21,6 @@ export const authApi = createApi({
         method: "POST",
         body: credentials,
       }),
-      invalidatesTags: ["auth"],
     }),
   }),
 });

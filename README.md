@@ -34,7 +34,7 @@ This will start the Strapi development server locally, and you can access the St
 
 Once the Strapi backend is set up, you can proceed to configure your Next.js frontend to interact with this API.
 
-# Posts
+# Frontend (Next.js) - Posts
 
 ## Technologies Used
 

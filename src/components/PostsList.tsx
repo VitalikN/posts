@@ -17,11 +17,12 @@ interface UserData {
 
 interface Post {
   id: string;
-
-  title: string;
-  datetime: string;
-  user: {
-    data: UserData | null;
+  attributes: {
+    title: string;
+    datetime: string;
+    user: {
+      data: UserData | null;
+    };
   };
 }
 const PostsList = () => {
@@ -32,7 +33,6 @@ const PostsList = () => {
     refetch();
   }, [data, refetch]);
   if (!data) return <Loader />;
-  console.log(data);
 
   return (
     <section className={styles.posts__list__section}>
@@ -40,27 +40,32 @@ const PostsList = () => {
         <h1 className={styles.title}>Posts List</h1>
         {isLoading ? (
           <Loader />
-        ) : data?.pagination.total > 0 ? (
+        ) : data?.meta?.pagination?.total > 0 ? (
           <ul className={styles.list}>
             {isLoading ? (
               <Loader />
             ) : (
-              data?.results.map(({ id, title, datetime }: Post) => (
-                <li key={id} className={styles.item}>
-                  {jwt ? (
-                    <Link
-                      href={`/post/${id}`}
-                      className={`${styles.link} ${styles.text}`}
-                    >
-                      <h2 className={styles.text}>Author: Anonymous</h2>
+              data?.data?.map(
+                ({ id, attributes: { title, datetime, user } }: Post) => (
+                  <li key={id} className={styles.item}>
+                    {jwt ? (
+                      <Link
+                        href={`/post/${id}`}
+                        className={`${styles.link} ${styles.text}`}
+                      >
+                        <h2 className={styles.text}>
+                          Author:{" "}
+                          {user?.data?.attributes?.username || "Anonymous"}
+                        </h2>{" "}
+                        <p className={styles.text}>{title}</p>
+                        <time>Data:{datetime}</time>
+                      </Link>
+                    ) : (
                       <p className={styles.text}>{title}</p>
-                      <time>Data:{datetime}</time>
-                    </Link>
-                  ) : (
-                    <p className={styles.text}>{title}</p>
-                  )}
-                </li>
-              ))
+                    )}
+                  </li>
+                )
+              )
             )}
           </ul>
         ) : (

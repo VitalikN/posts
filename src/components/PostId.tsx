@@ -34,10 +34,15 @@ const PostId: React.FC<PostId> = ({ id }) => {
   };
 
   const {
-    id: postId,
+    data: {
+      id: postId,
+      attributes: {
+        title,
+        datetime,
 
-    title,
-    datetime,
+        user,
+      },
+    },
   } = data;
 
   const handleDelete = async (id: string) => {
@@ -53,9 +58,7 @@ const PostId: React.FC<PostId> = ({ id }) => {
         ) : (
           <div className={styles.box__post__id}>
             <h2 className={styles.text}>
-              {" "}
-              Author: {/* // user?.data?.attributes?.username || */}
-              Anonymous
+              Author: {user?.data?.attributes?.username || "Anonymous"}
             </h2>
             <p className={styles.text}>{title}</p>
             <time>Data:{datetime}</time>

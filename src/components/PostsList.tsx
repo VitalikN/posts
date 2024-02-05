@@ -17,12 +17,11 @@ interface UserData {
 
 interface Post {
   id: string;
-  attributes: {
-    title: string;
-    datetime: string;
-    user: {
-      data: UserData | null;
-    };
+
+  title: string;
+  datetime: string;
+  user: {
+    data: UserData | null;
   };
 }
 const PostsList = () => {
@@ -41,32 +40,27 @@ const PostsList = () => {
         <h1 className={styles.title}>Posts List</h1>
         {isLoading ? (
           <Loader />
-        ) : data?.meta?.pagination?.total > 0 ? (
+        ) : data?.pagination.total > 0 ? (
           <ul className={styles.list}>
             {isLoading ? (
               <Loader />
             ) : (
-              data?.data?.map(
-                ({ id, attributes: { title, datetime, user } }: Post) => (
-                  <li key={id} className={styles.item}>
-                    {jwt ? (
-                      <Link
-                        href={`/post/${id}`}
-                        className={`${styles.link} ${styles.text}`}
-                      >
-                        <h2 className={styles.text}>
-                          Author:{" "}
-                          {user?.data?.attributes?.username || "Anonymous"}
-                        </h2>
-                        <p className={styles.text}>{title}</p>
-                        <time>Data:{datetime}</time>
-                      </Link>
-                    ) : (
+              data?.results.map(({ id, title, datetime }: Post) => (
+                <li key={id} className={styles.item}>
+                  {jwt ? (
+                    <Link
+                      href={`/post/${id}`}
+                      className={`${styles.link} ${styles.text}`}
+                    >
+                      <h2 className={styles.text}>Author: Anonymous</h2>
                       <p className={styles.text}>{title}</p>
-                    )}
-                  </li>
-                )
-              )
+                      <time>Data:{datetime}</time>
+                    </Link>
+                  ) : (
+                    <p className={styles.text}>{title}</p>
+                  )}
+                </li>
+              ))
             )}
           </ul>
         ) : (

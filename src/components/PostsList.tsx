@@ -41,7 +41,7 @@ const PostsList = () => {
         <h1 className={styles.title}>Posts List</h1>
         {isLoading ? (
           <Loader />
-        ) : data.meta.pagination.total > 0 ? (
+        ) : data?.meta?.pagination?.total > 0 ? (
           <ul className={styles.list}>
             {isLoading ? (
               <Loader />

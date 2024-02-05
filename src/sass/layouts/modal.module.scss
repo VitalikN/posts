@@ -1,0 +1,34 @@
+@import "../utils/container.scss";
+@import "../utils/mixins";
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+  z-index: 1;
+}
+
+.modal__content {
+  display: flex;
+  justify-content: center;
+  padding: 100px 15px;
+}
+.modal__close {
+  cursor: pointer;
+  color: #000000;
+  font-size: 24px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+
+  transition: all 0.5s;
+  &:hover {
+    transform: scale(1.2);
+    color: #000000;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.9));
+  }
+}

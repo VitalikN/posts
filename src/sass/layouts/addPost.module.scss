@@ -1,0 +1,9 @@
+@import "../utils/container.scss";
+@import "../utils/mixins";
+@import "./login.module.scss";
+@import "./postsList.module.scss";
+
+.add_post {
+  padding-top: 50px;
+  height: calc(100vh - 84px);
+}

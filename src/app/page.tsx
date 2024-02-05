@@ -1,10 +1,5 @@
 import PostsList from "@/components/PostsList";
 
-const Home = () => {
-  return (
-    <>
-      <PostsList />
-    </>
-  );
-};
+const Home = () => <PostsList />;
+
 export default Home;

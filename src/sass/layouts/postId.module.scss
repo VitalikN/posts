@@ -1,2 +1,37 @@
 @import "../utils/container.scss";
 @import "../utils/mixins";
+@import "./postsList.module.scss";
+
+.postId__section {
+  padding-top: 50px;
+  height: calc(100vh - 84px);
+}
+
+.box__post__id {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.5s;
+  width: 300px;
+  padding: 10px;
+  margin: 0 auto;
+  @include tablet {
+    justify-content: space-between;
+  }
+  &:hover,
+  &:focus {
+    border-radius: 20px;
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    background: #696969;
+    color: #f2f2f2;
+
+    outline: none;
+    scale: 1.1;
+  }
+}
+.box__icon {
+  display: flex;
+  gap: 20px;
+}

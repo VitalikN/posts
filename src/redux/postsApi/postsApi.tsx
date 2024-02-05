@@ -9,7 +9,7 @@ export const postsApi = createApi({
   endpoints: (builder) => ({
     getAllPosts: builder.query({
       query: () => ({
-        url: "/posts",
+        url: "/posts?populate=*",
         method: "GET",
       }),
       providesTags: ["Posts"],

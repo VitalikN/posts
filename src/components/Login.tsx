@@ -1,18 +1,18 @@
 "use client";
 import Link from "next/link";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { object, string } from "yup";
 
 import styles from "../sass/layouts/login.module.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLoginMutation } from "@/redux/auth/authAPI";
 import { useRouter } from "next/navigation";
+import { object, string } from "yup";
 
 export const validationSchema = object().shape({
   identifier: string().required("Required field!"),
   password: string()
-    .min(6, "Password must be at least 6 characters long!")
+    .min(6, "Password must contain at least 6 characters!")
     .required("Required field!"),
 });
 
@@ -29,9 +29,6 @@ export interface ErrorFeedbackProps {
 const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
   const router = useRouter();
-  // const name = useSelector(authSelector.getName);
-  // const email = useSelector(authSelector.getidentifier);
-  // const jwt = useSelector(authSelector.selectJwt);
 
   const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
     return (
@@ -60,8 +57,10 @@ const Login = () => {
       .catch(() => toast.error("Invalid login or password."));
   };
   return (
-    <section>
+    <section className={styles.section__login}>
       <div className={`${styles.container} `}>
+        <h2 className={styles.title}>Login</h2>
+
         <Formik
           initialValues={{ identifier: "", password: "" }}
           onSubmit={handleSubmit}

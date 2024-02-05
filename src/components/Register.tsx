@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import styles from "../sass/layouts/login.module.scss";
 import { useRegisterMutation } from "@/redux/auth/authAPI";
+import { useRouter } from "next/navigation";
 
 export interface ErrorFeedbackProps {
   name: string;
@@ -29,7 +30,7 @@ export const validationSchemaRegister = object().shape({
 
 const Register = () => {
   const [register, { isLoading }] = useRegisterMutation();
-
+  const router = useRouter();
   const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
     return (
       <ErrorMessage name={name}>
@@ -51,14 +52,16 @@ const Register = () => {
             : toast.error("Invalid login or password.");
         }
         resetForm();
+        router.push("/");
       })
 
       .catch(() => toast.error("Invalid login or password."));
   };
 
   return (
-    <section>
+    <section className={styles.section__login}>
       <div className={`${styles.container} `}>
+        <h2 className={styles.title}>Registration</h2>
         <Formik
           initialValues={{ username: "", email: "", password: "" }}
           onSubmit={handleSubmit}

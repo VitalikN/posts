@@ -24,8 +24,8 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    clearjwt: (state) => {
-      state.jwt = null;
+    clearjwt: () => {
+      return { ...initialState };
     },
   },
   extraReducers: (builder) => {

@@ -1,10 +1,12 @@
 @import "../utils/container.scss";
 @import "../utils/mixins";
+@import "./postsList.module.scss";
 
 .section__login {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 50px;
 }
 
 .formik {
@@ -23,16 +25,6 @@
   padding: 20px;
   width: 100%;
   margin: 0 auto;
-}
-
-.title {
-  font-size: 1.8em;
-  font-weight: 600;
-  line-height: 1.2em;
-  letter-spacing: 0px;
-  text-align: center;
-  padding-bottom: 20px;
-  color: #696969;
 }
 
 .form__box {
@@ -75,14 +67,14 @@
   }
 }
 .error {
-  font-size: 12px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
   color: red;
   position: absolute;
   left: 0;
-  bottom: -5px;
+  bottom: -0px;
   opacity: 0.9;
 }
 .styledBtn {

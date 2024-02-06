@@ -7,24 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLoginMutation } from "@/redux/auth/authAPI";
 import { useRouter } from "next/navigation";
-import { object, string } from "yup";
-
-export const validationSchema = object().shape({
-  identifier: string().required("Required field!"),
-  password: string()
-    .min(6, "Password must contain at least 6 characters!")
-    .required("Required field!"),
-});
-
-export interface FormValues {
-  name?: string;
-  identifier: string;
-  password: string;
-}
-
-export interface ErrorFeedbackProps {
-  name: string;
-}
+import { validationSchemaLogin } from "@/utils/Schema";
+import { ErrorFeedbackProps, FormValueslogin } from "@/utils/type";
 
 const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
@@ -39,7 +23,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (
-    values: FormValues,
+    values: FormValueslogin,
     { resetForm }: { resetForm: () => void }
   ) => {
     await login(values)
@@ -64,7 +48,7 @@ const Login = () => {
         <Formik
           initialValues={{ identifier: "", password: "" }}
           onSubmit={handleSubmit}
-          validationSchema={validationSchema}
+          validationSchema={validationSchemaLogin}
         >
           {({ errors, touched }) => (
             <Form className={styles.form}>

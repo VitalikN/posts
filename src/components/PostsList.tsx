@@ -8,23 +8,8 @@ import { useSelector } from "react-redux";
 import styles from "../sass/layouts/postsList.module.scss";
 import { useEffect } from "react";
 import Loader from "./Loader";
+import { Post } from "@/utils/type";
 
-interface UserData {
-  attributes: {
-    username: string;
-  };
-}
-
-interface Post {
-  id: string;
-  attributes: {
-    title: string;
-    datetime: string;
-    user: {
-      data: UserData | null;
-    };
-  };
-}
 const PostsList = () => {
   const { data, error, isLoading, refetch } = useGetAllPostsQuery({});
 

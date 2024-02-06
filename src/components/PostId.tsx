@@ -13,9 +13,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import Modal from "./Modal";
 import Loader from "./Loader";
-interface PostId {
-  id: string;
-}
+import { PostId } from "@/utils/type";
+
 const PostId: React.FC<PostId> = ({ id }) => {
   const [deletePost] = useDeletePostMutation();
   const { data, error, isLoading } = useGetPostQuery(id);

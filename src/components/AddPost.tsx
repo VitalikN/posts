@@ -2,24 +2,14 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import styles from "../sass/layouts/addPost.module.scss";
 
-import { object, string } from "yup";
 import { useAddPostMutation } from "@/redux/postsApiUser/postsApiUser";
 import { useRouter } from "next/navigation";
 
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
+import { validationSchemaAdd } from "@/utils/Schema";
+import { ErrorFeedbackProps, FormValuesAdd } from "@/utils/type";
 
-export const validationSchemaAdd = object().shape({
-  title: string().required("Required field!"),
-  datetime: string().required("Required field!"),
-});
-export interface ErrorFeedbackProps {
-  name: string;
-}
-export type FormValuesAdd = {
-  title: string;
-  datetime: string;
-};
 const AddPost = () => {
   const router = useRouter();
   const jwt = useSelector(authSelector.selectJwt);

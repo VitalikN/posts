@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { object, string } from "yup";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,24 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "../sass/layouts/login.module.scss";
 import { useRegisterMutation } from "@/redux/auth/authAPI";
 import { useRouter } from "next/navigation";
-
-export interface ErrorFeedbackProps {
-  name: string;
-}
-export interface FormValues {
-  username?: string;
-  email: string;
-  password: string;
-}
-
-export const validationSchemaRegister = object().shape({
-  username: string().required("Required field!"),
-
-  email: string().required("Required field!"),
-  password: string()
-    .min(6, "Password must be at least 6 characters long!")
-    .required("Required field!"),
-});
+import { validationSchema } from "@/utils/Schema";
+import { ErrorFeedbackProps, FormValues } from "@/utils/type";
 
 const Register = () => {
   const [register, { isLoading }] = useRegisterMutation();
@@ -65,7 +48,7 @@ const Register = () => {
         <Formik
           initialValues={{ username: "", email: "", password: "" }}
           onSubmit={handleSubmit}
-          validationSchema={validationSchemaRegister}
+          validationSchema={validationSchema}
         >
           {({ errors, touched }) => (
             <Form className={styles.form}>
